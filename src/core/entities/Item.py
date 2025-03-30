@@ -18,19 +18,20 @@ class ItemCategory(Enum):
     QUEST = "quest"  # Квестовые (?могут быть одновременно и другой категории или нет?)
 
 
-class ItemRarity(Enum): # нужно это?
+class ItemRarity(Enum):  # нужно это?
     """Редкость предмета"""
-    COMMON = "common"       # Обычный
-    UNCOMMON = "uncommon"   # Необычный
-    RARE = "rare"           # Редкий
-    EPIC = "epic"           # Эпический
-    LEGENDARY = "legendary" # Легендарный
+    COMMON = "common"  # Обычный
+    UNCOMMON = "uncommon"  # Необычный
+    RARE = "rare"  # Редкий
+    EPIC = "epic"  # Эпический
+    LEGENDARY = "legendary"  # Легендарный
 
 
 @dataclass(frozen=True)
 class ItemID:
     """Уникальный идентификатор предмета"""
     value: UUID
+
 
 @dataclass(frozen=True)
 class Size:
@@ -46,13 +47,13 @@ class Size:
 class Item:
     """Базовая сущность предмета"""
     id: ItemID
-    name: str # Название
-    description: str # Описание
+    name: str  # Название
+    description: str  # Описание
     category: ItemCategory  # Тип предмета (оружие, одежда и т. д.)
     rarity: ItemRarity  # Редкость предмета
     size: Size  # Размер предмета в слотах
     price: int  # Стоимость предмета в игровой валюте (?нужно?)
-    weight: float # Вес (?нужно?)
+    weight: float  # Вес (?нужно?)
     durability: Optional[int] = None  # Прочность (если применимо)
     repair_count: Optional[int] = None  # Количество оставшихся ремонтов
     is_stackable: bool = False  # Можно ли складывать в один слот
@@ -71,4 +72,3 @@ class Item:
 class Backpack(Item):
     """Рюкзак — предмет, который увеличивает количество слотов в инвентаре"""
     extra_slots: int = 5  # Дефолтное значение для увеличения слотов (например, 5 дополнительных слотов)
-
