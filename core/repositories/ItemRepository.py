@@ -3,6 +3,8 @@ from typing import List, Optional
 
 from src.core.entities.Item import ItemID
 from src.core.repositories.dto import ItemCreateDTO, ItemResponseDTO, ItemUpdateDTO
+from src.core.repositories.dto.ItemFilterDTO import ItemFilterDTO
+from src.core.repositories.dto.ItemListDTO import ItemListDTO
 
 
 class ItemRepository(ABC):
@@ -24,14 +26,18 @@ class ItemRepository(ABC):
         pass
 
     @abstractmethod
-    async def delete(self, item_id: int) -> None:
+    async def delete(self, item_id: ItemID) -> None:
         """Удаляет Item по ее ID."""
+        pass
+
+    @abstractmethod
+    async def find_items(self, filters: ItemFilterDTO) -> ItemListDTO:
+        """Находит предметы по заданным фильтрам."""
         pass
 
 
 '''
 [получить каждую из характеристик: прочность и количество ремонтов, и т.д.]
 [апдейт характеристик: прочность и количество ремонтов, или всех?]
-[частичный апдейт]
 '''
 

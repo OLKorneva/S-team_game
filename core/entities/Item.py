@@ -48,15 +48,16 @@ class Item:
     id: ItemID
     name: str # Название
     description: str # Описание
-    category: ItemCategory  # Тип предмета (оружие, одежда и т. д.)
+    category: ItemCategory  # Тип предмета (оружие, одежда и т.д.)
     rarity: ItemRarity  # Редкость предмета
     size: Size  # Размер предмета в слотах
     price: int  # Стоимость предмета в игровой валюте (?нужно?)
+    effects: List[UUID]  # Список ID эффектов, которые накладывает предмет
     weight: float # Вес (?нужно?)
     durability: Optional[int] = None  # Прочность (если применимо)
     repair_count: Optional[int] = None  # Количество оставшихся ремонтов
     is_stackable: bool = False  # Можно ли складывать в один слот
-    effects: List[Effect] = None  # Эффекты, которые накладывает предмет
+    extra_slots: Optional[int] = None  # Дополнительные слоты (только для рюкзаков)
 
     def is_equippable(self) -> bool:
         """Можно ли надеть предмет на персонажа"""
@@ -66,9 +67,4 @@ class Item:
         """Можно ли употребить предмет"""
         return self.category in {ItemCategory.CONSUMABLE, ItemCategory.BOOSTER}
 
-
-@dataclass
-class Backpack(Item):
-    """Рюкзак — предмет, который увеличивает количество слотов в инвентаре"""
-    extra_slots: int = 5  # Дефолтное значение для увеличения слотов (например, 5 дополнительных слотов)
 
